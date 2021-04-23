@@ -1,0 +1,11 @@
+{
+  "name": "node-files",
+  "version": "1.0.0",
+  "description": "exercise 31-4 node files",
+  "main": "step1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob Andes",
+  "license": "ISC"
+}
