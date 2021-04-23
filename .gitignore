@@ -3,3 +3,4 @@ __pycache__/
 secrets.py
 todo.txt
 .env
+node_modules/
