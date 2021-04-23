@@ -1,0 +1,40 @@
+body {
+    background-color: #009c27;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gimme-btn {
+    background-color: #505050;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    width: 150px;
+    margin: 2rem 0;
+    padding: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #000000;
+    }
+}
+
+.card-cont {
+    height: 75vh;
+    width: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &__card {
+        height: 50vh;
+        width: 36vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 15%;
+        left: 25%;
+    }
+}

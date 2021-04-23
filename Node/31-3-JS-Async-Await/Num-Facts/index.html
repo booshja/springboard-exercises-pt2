@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Number Facts</title>
+    </head>
+    <body>
+        <main>
+            <section id="input">
+                <h1 class="headline">Number Facts!</h1>
+                <form action="#" id="num-form" class="form">
+                    <label for="fav-num" class="form__label"
+                        >Enter your favorite number:</label
+                    >
+                    <input
+                        type="text"
+                        name="fav-num"
+                        id="fav-num"
+                        class="form__input"
+                    />
+                    <button type="submit" id="form-submit" class="form__button">
+                        Submit
+                    </button>
+                </form>
+            </section>
+            <section id="fav-results">
+                <h2>Favorite Number (and multiples) facts:</h2>
+                <p id="num-fact" class="num-fact"></p>
+            </section>
+            <section id="four-facts">
+                <h2>Four Facts about your favorite Number:</h2>
+                <ol id="facts-list" class="facts__list"></ol>
+            </section>
+        </main>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="num_facts.js"></script>
+    </body>
+</html>
