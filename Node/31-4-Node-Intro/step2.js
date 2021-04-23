@@ -1,4 +1,5 @@
 const axios = require("axios");
+const process = require("process");
 const fs = require("fs");
 const arg = process.argv[2];
 
@@ -12,17 +13,18 @@ function cat(path) {
     });
 }
 
-async function webcat(url) {
+async function webCat(url) {
     try {
-        const res = await axios.get(url);
+        let res = await axios.get(url);
         console.log(res.data);
     } catch (e) {
         console.log("Error: URL does not exist");
+        process.exit(1);
     }
 }
 
 if (arg.includes("http")) {
-    webcat(arg);
+    webCat(arg);
 } else {
     cat(arg);
 }
