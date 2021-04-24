@@ -1,0 +1,15 @@
+{
+  "name": "31-5-node-markov",
+  "version": "1.0.0",
+  "description": "Markov Machine Jest Exercise",
+  "main": "makeText.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/booshja/springboard-exercises-pt2/tree/main/Node/31-5-Node-Markov"
+  },
+  "author": "Jacob Andes",
+  "license": "ISC"
+}
