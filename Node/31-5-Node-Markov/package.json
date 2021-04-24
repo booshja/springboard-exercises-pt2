@@ -11,5 +11,9 @@
     "url": "https://github.com/booshja/springboard-exercises-pt2/tree/main/Node/31-5-Node-Markov"
   },
   "author": "Jacob Andes",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "fs": "0.0.1-security"
+  }
 }
