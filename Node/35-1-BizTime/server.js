@@ -1,9 +1,14 @@
 /** Server startup for BizTime. */
+const dotenv = require("dotenv");
 
+const result = dotenv.config();
+
+if (result.error) {
+    throw result.error;
+}
 
 const app = require("./app");
 
-
-app.listen(3000, function () {
-  console.log("Listening on 3000");
+app.listen(process.env.PORT, function () {
+    console.log(process.env.PORT_MSG);
 });
