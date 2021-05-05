@@ -1,7 +1,8 @@
 /** Server startup for BizTime. */
-const dotenv = require("dotenv");
 
-const result = dotenv.config();
+const result = require("dotenv").config();
+
+console.log(result);
 
 if (result.error) {
     throw result.error;

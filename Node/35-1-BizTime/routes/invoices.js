@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = new express.Router();
 const db = require("../db");
 const ExpressError = require("../expressError");
 
@@ -87,3 +87,5 @@ router.delete("/:id", async (req, res, next) => {
         return next(e);
     }
 });
+
+module.exports = router;
