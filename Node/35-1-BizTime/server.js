@@ -2,8 +2,6 @@
 
 const result = require("dotenv").config();
 
-console.log(result);
-
 if (result.error) {
     throw result.error;
 }

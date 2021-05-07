@@ -8,7 +8,7 @@ function getDate() {
     const day = currentDate.getDate();
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
-    return `${day.toString(2)}/${month.toString(2)}/${year.toString(2)}`;
+    return `${day.toString()}/${month.toString()}/${year.toString()}`;
 }
 
 router.get("/", async (req, res) => {
@@ -29,7 +29,7 @@ router.get("/:id", async (req, res, next) => {
             id,
         ]);
         if (results.rows.length === 0) {
-            throw new ExpressError(`Cannot find invoice with id of ${id}`, 400);
+            throw new ExpressError(`Cannot find invoice with id of ${id}`, 404);
         }
         return res.send({ invoice: results.rows[0] });
     } catch (e) {
@@ -43,12 +43,12 @@ router.post("/", async (req, res, next) => {
         const add_date = getDate();
         const results = await db.query(
             `INSERT INTO invoices (comp_code, amt, paid, add_date, paid_date)
-            VALUES ($1,$2,'No',${add_date},'Not Paid') RETURNING *`,
+            VALUES ($1,$2,false,'${add_date}',null) RETURNING *`,
             [comp_code, amt]
         );
         return res.status(201).json({ invoice: results.rows[0] });
     } catch (e) {
-        return next(e);
+        return next(new ExpressError(e));
     }
 });
 
@@ -75,17 +75,20 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        const results = db.query(`DELETE FROM invoices WHERE id=$1`, [id]);
+        const results = await db.query(
+            `DELETE FROM invoices WHERE id=$1 RETURNING id`,
+            [id]
+        );
         if (results.rows.length === 0) {
             throw new ExpressError(
-                `Can't delete invoice with id of ${id}`,
+                `Cannot find to delete invoice with ID - ${id}`,
                 404
             );
         }
-        return res.send({ status: "deleted" });
     } catch (e) {
-        return next(e);
+        return next(new ExpressError(e, 404));
     }
+    return res.send({ status: "deleted" });
 });
 
 module.exports = router;

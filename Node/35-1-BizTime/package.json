@@ -1,18 +1,18 @@
 {
-  "name": "35-1-biztime",
-  "version": "1.0.0",
-  "description": "Exercise for Unit 35.1",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "Jacob Andes",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "pg": "^8.6.0",
-    "supertest": "^6.1.3"
-  }
+    "name": "35-1-biztime",
+    "version": "1.0.0",
+    "description": "Exercise for Unit 35.1",
+    "main": "server.js",
+    "scripts": {
+        "test": "jest",
+        "start": "node server.js"
+    },
+    "author": "Jacob Andes",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "pg": "^8.6.0",
+        "supertest": "^6.1.3"
+    }
 }

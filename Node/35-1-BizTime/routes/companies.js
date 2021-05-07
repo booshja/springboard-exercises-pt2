@@ -6,7 +6,7 @@ const ExpressError = require("../expressError");
 router.get("/", async (req, res) => {
     try {
         const results = await db.query(
-            `SELECT (code, name) FROM companies ORDER BY name`
+            `SELECT code, name FROM companies ORDER BY name`
         );
         return res.json({ companies: results.rows });
     } catch (e) {
@@ -81,7 +81,7 @@ router.put("/:code", async (req, res, next) => {
 router.delete("/:code", async (req, res, next) => {
     try {
         const { code } = req.params;
-        const results = db.query(
+        const results = await db.query(
             "DELETE FROM companies WHERE code=$1 RETURNING code",
             [code]
         );
@@ -91,10 +91,10 @@ router.delete("/:code", async (req, res, next) => {
                 404
             );
         }
-        return res.send({ status: "deleted" });
     } catch (e) {
-        return next(e);
+        return next(new ExpressError(e));
     }
+    return res.send({ status: "deleted" });
 });
 
 module.exports = router;
