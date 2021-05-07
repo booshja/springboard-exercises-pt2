@@ -56,6 +56,8 @@ router.put("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
         const { amt } = req.body;
+        let paidDate = null;
+
         const results = await db.query(
             `UPDATE invoices SET amt=$1 WHERE id=$2 RETURNING *`,
             [amt, id]
@@ -66,7 +68,22 @@ router.put("/:id", async (req, res, next) => {
                 404
             );
         }
-        return res.send({ invoice: results.rows[0] });
+        const currPaidDate = results.rows[0].paid_date;
+
+        if (!currPaidDate && paid) {
+            paidDate = new Date();
+        } else if (!paid) {
+            paidDate = null;
+        } else {
+            paidDate = currPaidDate;
+        }
+
+        const result = await db.query(
+            `UPDATE invoices SET amt=$1, paid=$2, paid_date=$3 WHERE id=$4 RETURNING id, comp_code, amt, paid, add_date, paid_date`,
+            [amt, paid, paidDate, id]
+        );
+
+        return res.json({ invoice: result.rows[0] });
     } catch (e) {
         return next(e);
     }
