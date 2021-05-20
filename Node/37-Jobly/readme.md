@@ -13,3 +13,4 @@ To run the tests:
 ## Change Log
 
 -   5-20-2021: Added documentation to sql.js
+-   5-20-2021: Added tests for sql.js

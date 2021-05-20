@@ -7,6 +7,7 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
     if (keys.length === 0) throw new BadRequestError("No data");
 
     // {firstName: 'Aliya', age: 32} => ['"first_name"=$1', '"age"=$2']
+    // Map an array of keys to use with preventing SQL Injection
     const cols = keys.map(
         (colName, idx) => `"${jsToSql[colName] || colName}"=$${idx + 1}`
     );
