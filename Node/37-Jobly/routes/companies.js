@@ -52,6 +52,15 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
 router.get("/", async function (req, res, next) {
     try {
         let companies;
+        const paramsList = ["name", "minEmployees", "maxEmployees"];
+
+        for (let param in Object.keys(req.params)) {
+            if (!param in paramsList) {
+                return next(
+                    new BadRequestError(`Unsupported filter - ${param}`)
+                );
+            }
+        }
 
         if (
             req.params.name ||
