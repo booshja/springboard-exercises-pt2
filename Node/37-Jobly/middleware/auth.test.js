@@ -2,7 +2,12 @@
 
 const jwt = require("jsonwebtoken");
 const { UnauthorizedError } = require("../expressError");
-const { authenticateJWT, ensureLoggedIn, ensureAdmin } = require("./auth");
+const {
+    authenticateJWT,
+    ensureLoggedIn,
+    ensureAdmin,
+    ensureAdminOrCurrUser,
+} = require("./auth");
 
 const { SECRET_KEY } = require("../config");
 const testJwt = jwt.sign({ username: "test", isAdmin: false }, SECRET_KEY);
@@ -105,5 +110,51 @@ describe("ensureAdmin", function () {
             expect(err instanceof UnauthorizedError).toBeTruthy();
         };
         ensureAdmin(req, res, next);
+    });
+});
+
+describe("ensureAdminOrCurrUser", function () {
+    test("works: as admin", function () {
+        expect.assertions(1);
+        const req = { params: { username: "bob" } };
+        const res = {
+            locals: { user: { username: "testAdmin", isAdmin: true } },
+        };
+        const next = function (err) {
+            expect(err).toBeFalsy();
+        };
+        ensureAdminOrCurrUser(req, res, next);
+    });
+
+    test("works: as current user", function () {
+        expect.assertions(1);
+        const req = { params: { username: "test" } };
+        const res = { locals: { user: { username: "test", isAdmin: false } } };
+        const next = function (err) {
+            expect(err).toBeFalsy();
+        };
+        ensureAdminOrCurrUser(req, res, next);
+    });
+
+    test("unauth if not admin or current user", function () {
+        expect.assertions(1);
+        const req = { params: { username: "bob" } };
+        const res = {
+            locals: { user: { username: "test", is_admin: false } },
+        };
+        const next = function (err) {
+            expect(err instanceof UnauthorizedError).toBeTruthy();
+        };
+        ensureAdminOrCurrUser(req, res, next);
+    });
+
+    test("unauth if anon", function () {
+        expect.assertions(1);
+        const req = {};
+        const res = { locals: {} };
+        const next = function (err) {
+            expect(err instanceof UnauthorizedError).toBeTruthy();
+        };
+        ensureAdminOrCurrUser(req, res, next);
     });
 });
