@@ -25,3 +25,6 @@ To run the tests:
 -   5-22-2021: Finished creating jobs model and tests
 -   5-22-2021: Created jobs routes and tests
 -   5-22-2021: Created filtered search for jobs and updated tests
+-   5-22-2021: Added jobs to /companies/:handle results
+-   5-22-2021: Added job application functionality with tests
+-   5-22-2021: Added job applications to /users/:id route results

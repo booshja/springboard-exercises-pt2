@@ -7,6 +7,8 @@ let jobsIds = [];
 
 async function commonBeforeAll() {
     // noinspection SqlWithoutWhere
+    await db.query("DELETE FROM applications");
+    // noinspection SqlWithoutWhere
     await db.query("DELETE FROM jobs");
     // noinspection SqlWithoutWhere
     await db.query("DELETE FROM companies");
@@ -27,7 +29,7 @@ async function commonBeforeAll() {
            ('Job4', NULL, NULL, 'c1')
     RETURNING id`);
 
-    resultsJobs.rows.forEach((j) => jobsIds.push(j.id));
+    jobsIds.splice(0, 0, ...resultsJobs.rows.map((r) => r.id));
 
     await db.query(
         `
@@ -43,6 +45,13 @@ async function commonBeforeAll() {
             await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
             await bcrypt.hash("password2", BCRYPT_WORK_FACTOR),
         ]
+    );
+
+    await db.query(
+        `
+        INSERT INTO applications(username, job_id)
+        VALUES ('u1', $1)`,
+        [jobsIds[0]]
     );
 }
 
