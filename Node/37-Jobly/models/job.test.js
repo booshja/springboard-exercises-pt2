@@ -75,6 +75,71 @@ describe("findAll", function () {
 
 /**************************** filtered findAll */
 
+describe("filtered find", function () {
+    test("works: exact name filter", async function () {
+        const params = { title: "Job1" };
+        let jobs = await Job.filterFind(params);
+        expect(jobs).toEqual([
+            {
+                id: expect.any(Number),
+                title: "Job1",
+                salary: 100,
+                equity: "0.1",
+                companyHandle: "c1",
+            },
+        ]);
+    });
+
+    test("works: partial name filter", async function () {
+        const params = { title: "1" };
+        let jobs = await Job.filterFind(params);
+        expect(jobs).toEqual([
+            {
+                id: expect.any(Number),
+                title: "Job1",
+                salary: 100,
+                equity: "0.1",
+                companyHandle: "c1",
+            },
+        ]);
+    });
+
+    test("works: minSalary filter", async function () {
+        const params = { minSalary: 300 };
+        let jobs = await Job.filterFind(params);
+        expect(jobs).toEqual([
+            {
+                id: expect.any(Number),
+                title: "Job3",
+                salary: 300,
+                equity: "0",
+                companyHandle: "c1",
+            },
+        ]);
+    });
+
+    test("works: hasEquity filter", async function () {
+        const params = { hasEquity: true };
+        let jobs = await Job.filterFind(params);
+        expect(jobs).toEqual([
+            {
+                id: expect.any(Number),
+                title: "Job1",
+                salary: 100,
+                equity: "0.1",
+                companyHandle: "c1",
+            },
+            {
+                id: expect.any(Number),
+                title: "Job2",
+                salary: 200,
+                equity: "0.2",
+                companyHandle: "c1",
+            },
+        ]);
+    });
+});
+
 /***************************************** get */
 
 describe("get", function () {

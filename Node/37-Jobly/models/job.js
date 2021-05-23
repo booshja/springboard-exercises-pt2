@@ -49,6 +49,52 @@ class Job {
         return jobsRes.rows;
     }
 
+    /** Find jobs with query string filters (title, minSalary, hasEquity)
+     *
+     * Returns [{id, title, salary, equity, companyHandle }, ...]
+     */
+
+    static async filterFind(params) {
+        let wheres = [];
+        let values = [];
+        let idx = 1;
+
+        // Add title to wheres an values if in params
+        if (params.title) {
+            wheres.push(`title ILIKE $${idx}`);
+            values.push("%" + params.title + "%");
+            idx += 1;
+        }
+
+        // Add minSalary to wheres and values if in params
+        if (params.minSalary) {
+            wheres.push(`salary >= $${idx}`);
+            values.push(+params.minSalary);
+            idx += 1;
+        }
+
+        // Add hasEquity to wheres if in params
+        if (params.hasEquity) {
+            wheres.push(`equity > 0.0`);
+        }
+
+        // Create string from wheres array
+        const sqlWheres = wheres.join(" AND ");
+
+        // Database request
+        const jobsRes = await db.query(
+            `SELECT id,
+                    title,
+                    salary,
+                    equity,
+                    company_handle AS "companyHandle"
+            FROM jobs
+            WHERE ${sqlWheres}`,
+            values
+        );
+        return jobsRes.rows;
+    }
+
     /** Given a job id, return data about job.
      *
      * Returns { title, salary, equity, companyHandle }
