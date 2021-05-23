@@ -41,10 +41,34 @@ describe("findAll", function () {
     test("works: no filter", async function () {
         let jobs = await Job.findAll();
         expect(jobs).toEqual([
-            { title: "Job1", salary: 100, equity: "0.1", companyHandle: "c1" },
-            { title: "Job2", salary: 200, equity: "0.2", companyHandle: "c1" },
-            { title: "Job3", salary: 300, equity: "0", companyHandle: "c1" },
-            { title: "Job4", salary: null, equity: null, companyHandle: "c1" },
+            {
+                id: expect.any(Number),
+                title: "Job1",
+                salary: 100,
+                equity: "0.1",
+                companyHandle: "c1",
+            },
+            {
+                id: expect.any(Number),
+                title: "Job2",
+                salary: 200,
+                equity: "0.2",
+                companyHandle: "c1",
+            },
+            {
+                id: expect.any(Number),
+                title: "Job3",
+                salary: 300,
+                equity: "0",
+                companyHandle: "c1",
+            },
+            {
+                id: expect.any(Number),
+                title: "Job4",
+                salary: null,
+                equity: null,
+                companyHandle: "c1",
+            },
         ]);
     });
 });

@@ -22,4 +22,5 @@ To run the tests:
 -   5-20-2021: Added new functionality for filtered search in model and view - company.js and companies.js
 -   5-20-2021: Changed middleware for routes protected for admins, updated tests
 -   5-21-2021: Created jobs model (create) and test (create)
+-   5-22-2021: Finished creating jobs model and tests
 -   5-22-2021: Created jobs POST route and test

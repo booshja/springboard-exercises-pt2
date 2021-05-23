@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://our.company.com/jobUpdate.schema.json",
+    "type": "object",
+    "title": "Job update schema",
+    "examples": [
+        {
+            "title": "Full Stack Software Engineer",
+            "salary": 75000,
+            "equity": 0.8,
+            "companyHandle": "company-1"
+        }
+    ],
+    "required": [],
+    "properties": {
+        "title": {
+            "$id": "#/properties/title",
+            "type": "string",
+            "examples": ["Full Stack Software Engineer"]
+        },
+        "salary": {
+            "$id": "#/properties/salary",
+            "type": "integer",
+            "examples": [75000],
+            "minimum": 0
+        },
+        "equity": {
+            "$id": "#/properties/equity",
+            "type": "number",
+            "default": 0.0,
+            "examples": [0.8],
+            "minimum": 0.0,
+            "maximum": 1.0
+        },
+        "companyHandle": {
+            "$id": "#/properties/companyHandle",
+            "type": "string",
+            "examples": ["company-1"]
+        }
+    },
+    "additionalProperties": false
+}
