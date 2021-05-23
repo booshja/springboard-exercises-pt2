@@ -14,6 +14,7 @@ const {
     u1AdminToken,
     jobsIds,
 } = require("./_testCommon");
+const { BadRequestError } = require("../expressError");
 
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
@@ -110,6 +111,14 @@ describe("GET /jobs", function () {
                 },
             ],
         });
+    });
+
+    test("fails: unsupported filter values", async function () {
+        try {
+            const resp = await request(app).get("/jobs&wrong=bad");
+        } catch (err) {
+            expect(err instanceof BadRequestError).toBeTruthy();
+        }
     });
 
     test("fails: test next() handler", async function () {

@@ -52,8 +52,22 @@ router.post("/", ensureAdmin, async function (req, res, next) {
 
 router.get("/", async function (req, res, next) {
     try {
-        let jobs = await Job.findAll();
+        let jobs;
+        const paramsList = ["title", "minSalary", "hasEquity"];
 
+        for (let param in Object.keys(req.params)) {
+            if (!params in paramsList) {
+                return next(
+                    new BadRequestError(`Unsupported filter - ${param}`)
+                );
+            }
+        }
+
+        if (req.params.title || req.params.minSalary || req.params.hasEquity) {
+            jobs = await Job.filterFind(req.params);
+        } else {
+            jobs = await Job.findAll();
+        }
         return res.json({ jobs });
     } catch (err) {
         return next(err);
