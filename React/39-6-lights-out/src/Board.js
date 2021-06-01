@@ -50,6 +50,15 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
 
     function hasWon() {
         // TODO: check the board in state to determine whether the player has won.
+        let lights = false;
+        for (let row in board) {
+            for (let col in row) {
+                if (col) {
+                    lights = true;
+                }
+            }
+        }
+        return lights ? false : true;
     }
 
     /*******************************************/
@@ -77,10 +86,12 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
     /*******************************************/
 
     // if the game is won, just show a winning msg & render nothing else
-
-    // TODO
+    if (hasWon()) {
+        return <p className="App--win">You Won!</p>;
+    }
 
     // make table board
+    let tableBoard;
 
     // TODO
 }
