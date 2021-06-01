@@ -46,10 +46,8 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
         return initialBoard;
     }
 
-    /*******************************************/
-
     function hasWon() {
-        // TODO: check the board in state to determine whether the player has won.
+        /** check the board in state to determine whether the player has won. */
         let lights = false;
         for (let row in board) {
             for (let col in row) {
@@ -61,15 +59,12 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
         return lights ? false : true;
     }
 
-    /*******************************************/
-
     function flipCellsAround(coord) {
         setBoard((oldBoard) => {
             const [y, x] = coord.split("-").map(Number);
 
             const flipCell = (y, x, boardCopy) => {
                 // if this coord is actually on board, flip it
-
                 if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
                     boardCopy[y][x] = !boardCopy[y][x];
                 }
@@ -91,9 +86,28 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
     }
 
     // make table board
-    let tableBoard;
-
-    // TODO
+    return (
+        <div>
+            <table>
+                {/* Map over row arrays in board to make tr's */}
+                {board.map((row) => {
+                    return (
+                        <tr>
+                            {/* Map over col values in row to make Cells */}
+                            {row.map((col) => {
+                                return (
+                                    <Cell
+                                        flipCellsAroundMe={flipCellsAround}
+                                        isLit={col ? true : false}
+                                    />
+                                );
+                            })}
+                        </tr>
+                    );
+                })}
+            </table>
+        </div>
+    );
 }
 
 export default Board;
