@@ -48,18 +48,26 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
 
     function hasWon() {
         /** check the board in state to determine whether the player has won. */
+        if (board === undefined) {
+            return false;
+        }
         let lights = false;
-        for (let row in board) {
-            for (let col in row) {
+        for (let row of board) {
+            for (let col of row) {
                 if (col) {
                     lights = true;
                 }
             }
         }
-        return lights ? false : true;
+        if (lights) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function flipCellsAround(coord) {
+        // Flip the cell and those around it, return new board
         setBoard((oldBoard) => {
             const [y, x] = coord.split("-").map(Number);
 
@@ -70,15 +78,22 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
                 }
             };
 
-            // TODO: Make a (deep) copy of the oldBoard
+            // Make a (deep) copy of the oldBoard
+            let newBoard = oldBoard.map((row) => row.map((col) => col));
 
-            // TODO: in the copy, flip this cell and the cells around it
+            // in the copy, flip this cell and the cells around it
+            flipCell(y, x, newBoard);
+            for (let flipY = y - 1; flipY < y + 2; flipY++) {
+                flipCell(flipY, x, newBoard);
+            }
+            for (let flipX = x - 1; flipX < x + 2; flipX++) {
+                flipCell(y, flipX, newBoard);
+            }
 
-            // TODO: return the copy
+            // return the copy
+            return newBoard;
         });
     }
-
-    /*******************************************/
 
     // if the game is won, just show a winning msg & render nothing else
     if (hasWon()) {
@@ -89,22 +104,26 @@ function Board({ nrows = 6, ncols = 6, chanceLightStartsOn = 0.5 }) {
     return (
         <div>
             <table>
-                {/* Map over row arrays in board to make tr's */}
-                {board.map((row) => {
-                    return (
-                        <tr>
-                            {/* Map over col values in row to make Cells */}
-                            {row.map((col) => {
-                                return (
-                                    <Cell
-                                        flipCellsAroundMe={flipCellsAround}
-                                        isLit={col ? true : false}
-                                    />
-                                );
-                            })}
-                        </tr>
-                    );
-                })}
+                <tbody>
+                    {/* Map over row arrays in board to make tr's */}
+                    {board.map((row, rIdx) => {
+                        return (
+                            <tr key={"r" + rIdx.toString()}>
+                                {/* Map over col values in row to make Cells */}
+                                {row.map((col, cIdx) => {
+                                    return (
+                                        <Cell
+                                            key={`${rIdx.toString()}-${cIdx.toString()}`}
+                                            coord={`${rIdx.toString()}-${cIdx.toString()}`}
+                                            flipCellsAroundMe={flipCellsAround}
+                                            isLit={col ? true : false}
+                                        />
+                                    );
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
             </table>
         </div>
     );
