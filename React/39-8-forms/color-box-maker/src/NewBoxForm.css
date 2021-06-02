@@ -1,0 +1,27 @@
+.NewBoxForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.NewBoxForm--label {
+    padding-right: 1rem;
+}
+
+.NewBoxForm--input {
+    margin-right: 1rem;
+}
+
+.NewBoxForm--btn {
+    border: 2px solid blue;
+    border-radius: 3px;
+    background-color: transparent;
+    color: blue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.NewBoxForm--btn:hover {
+    background-color: blue;
+    color: white;
+}

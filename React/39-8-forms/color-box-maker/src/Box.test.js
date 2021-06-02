@@ -3,12 +3,12 @@ import { render } from "@testing-library/react";
 import Box from "./Box";
 
 it("renders without crashing", () => {
-    // TODO: Add props
-    render(<Box color="" width="" height="" />);
+    render(<Box color="green" width={100} height={100} id={7} />);
 });
 
 it("matches snapshots", () => {
-    // TODO: Add props
-    const { asFragment } = render(<Box color="" width="" height="" />);
+    const { asFragment } = render(
+        <Box color="green" width={100} height={100} id={7} />
+    );
     expect(asFragment()).toMatchSnapshot();
 });
