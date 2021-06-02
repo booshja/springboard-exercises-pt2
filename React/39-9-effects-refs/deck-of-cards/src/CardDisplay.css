@@ -1,0 +1,20 @@
+.CardDisplay--btn {
+    margin-top: 1rem;
+    padding: 10px 15px;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.CardDisplay--btn:hover {
+    background-color: #444444;
+}
+
+.CardDisplay--cards {
+    margin-top: 2rem;
+}
