@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import uuid from "uuid";
 
@@ -13,10 +13,17 @@ const useFlip = () => {
 
 const useAxios = (url) => {
     const [data, setData] = useState([]);
-    const addData = async () => {
-        const res = await axios.get(url);
+    const [baseUrl, setBaseUrl] = useState(null);
+
+    useEffect(() => {
+        setBaseUrl(url);
+    }, [url]);
+
+    const addData = async (urlSuffix = "") => {
+        const res = await axios.get(baseUrl + urlSuffix);
         setData((data) => [...data, { ...res.data, id: uuid() }]);
     };
+
     return [data, addData];
 };
 
