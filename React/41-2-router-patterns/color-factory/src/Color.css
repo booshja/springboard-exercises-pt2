@@ -1,0 +1,13 @@
+.Color {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Color--text {
+    color: white;
+    text-transform: uppercase;
+    font-size: 6rem;
+}

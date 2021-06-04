@@ -1,0 +1,21 @@
+.ColorList--header {
+    color: white;
+    background-color: black;
+    padding: 1rem 0 3rem 0;
+    text-align: center;
+}
+
+.ColorList--header a {
+    color: white;
+    font-size: 2rem;
+}
+
+.ColorList--main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ColorList--main--list {
+    list-style-type: none;
+}
