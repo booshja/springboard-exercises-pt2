@@ -1,0 +1,16 @@
+.DogList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.DogList--headline {
+    text-align: center;
+}
+
+.DogList--dogs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}

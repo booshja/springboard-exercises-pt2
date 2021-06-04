@@ -1,0 +1,47 @@
+.DogDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 1rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+    width: 300px;
+    padding: 1rem;
+}
+
+.DogDetailsSolo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.DogDetails--headline {
+    text-align: center;
+}
+
+.DogDetails--name {
+    text-align: center;
+}
+
+.DogDetails--img {
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.DogDetails--age {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.DogDetails--factsList--fact {
+    margin: 0.25rem 0;
+}
+
+.DogDetails--link {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 1rem;
+}
