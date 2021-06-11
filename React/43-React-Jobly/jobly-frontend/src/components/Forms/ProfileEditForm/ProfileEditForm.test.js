@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
-import App from "./App";
+import ProfileEditForm from "./ProfileEditForm";
 
 /** Smoke Test */
 it("renders without crashing", () => {
-    render(<App />);
+    render(<ProfileEditForm />);
 });
 
 /** Snapshot Test */
 it("matches snapshot", () => {
-    const { asFragment } = render(<App />);
+    const { asFragment } = render(<ProfileEditForm />);
     expect(asFragment()).toMatchSnapshot();
 });

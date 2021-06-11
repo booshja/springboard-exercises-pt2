@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
-import App from "./App";
+import Navbar from "./Navbar";
 
 /** Smoke Test */
 it("renders without crashing", () => {
-    render(<App />);
+    render(<Navbar />);
 });
 
 /** Snapshot Test */
 it("matches snapshot", () => {
-    const { asFragment } = render(<App />);
+    const { asFragment } = render(<Navbar />);
     expect(asFragment()).toMatchSnapshot();
 });

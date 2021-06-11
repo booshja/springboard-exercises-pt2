@@ -1,13 +1,12 @@
 import React from "react";
-import "./assets/css/App.css";
 
-function App() {
+const SearchBar = () => {
     return (
-        <div className="App">
+        <div>
             {/*  */}
             {/*  */}
         </div>
     );
-}
+};
 
-export default App;
+export default SearchBar;

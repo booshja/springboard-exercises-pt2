@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
-import App from "./App";
+import SignupForm from "./SignupForm";
 
 /** Smoke Test */
 it("renders without crashing", () => {
-    render(<App />);
+    render(<SignupForm />);
 });
 
 /** Snapshot Test */
 it("matches snapshot", () => {
-    const { asFragment } = render(<App />);
+    const { asFragment } = render(<SignupForm />);
     expect(asFragment()).toMatchSnapshot();
 });

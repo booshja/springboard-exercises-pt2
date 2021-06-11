@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
-import App from "./App";
+import JobDetail from "./JobDetail";
 
 /** Smoke Test */
 it("renders without crashing", () => {
-    render(<App />);
+    render(<JobDetail />);
 });
 
 /** Snapshot Test */
 it("matches snapshot", () => {
-    const { asFragment } = render(<App />);
+    const { asFragment } = render(<JobDetail />);
     expect(asFragment()).toMatchSnapshot();
 });
