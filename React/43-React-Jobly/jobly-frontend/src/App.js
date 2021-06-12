@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// router
 import Router from "./Router";
 // api
 import JoblyApi from "./api";
@@ -36,7 +37,7 @@ function App() {
 
     async function logout() {
         // Clear state and token on JoblyApi class to log out user
-        await JoblyApi.logout();
+        await JoblyApi.logoutUser();
         setToken("");
         setUser(null);
     }

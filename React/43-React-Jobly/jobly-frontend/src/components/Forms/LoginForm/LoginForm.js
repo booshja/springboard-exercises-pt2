@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 // context
 import UserContext from "../../../context/UserContext";
 // css
@@ -11,9 +12,11 @@ const LoginForm = () => {
         password: "",
     };
 
-    // set up state and context
+    // set up state, context, and history object
     const [formData, setFormData] = useState(INITIAL_STATE);
     const { login } = useContext(UserContext);
+    const history = useHistory();
+    let error = false;
 
     const handleChange = (e) => {
         /** On form input change, update the value in state */
@@ -32,8 +35,14 @@ const LoginForm = () => {
          * - Clean the form inputs via state
          */
         e.preventDefault();
-        const VARIABLE = await login({ ...formData });
-        setFormData(INITIAL_STATE);
+        try {
+            await login(formData.username, formData.password);
+            setFormData(INITIAL_STATE);
+            history.push("/");
+        } catch (e) {
+            error = "Invalid username/password.";
+            setFormData(INITIAL_STATE);
+        }
     };
 
     return (
@@ -54,7 +63,7 @@ const LoginForm = () => {
                 Password:
             </label>
             <input
-                type="text"
+                type="password"
                 id="password"
                 name="password"
                 value={formData.password}
@@ -62,6 +71,11 @@ const LoginForm = () => {
                 placeholder="Password"
                 className="LoginForm--input"
             />
+            {error ? (
+                <span id="error" className="error">
+                    {error}
+                </span>
+            ) : null}
             <button className="LoginForm--btn">Submit</button>
         </form>
     );

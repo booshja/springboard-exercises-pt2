@@ -1,13 +1,24 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 // context
 import UserContext from "../../context/UserContext";
 // css
 import "../../assets/css/Navbar.css";
 
 const Navbar = () => {
-    // set up context
-    const { user } = useContext(UserContext);
+    // set up context and history object
+    const { user, logout } = useContext(UserContext);
+    const history = useHistory();
+
+    const handleClick = async () => {
+        /**
+         * When user clicks logout
+         * - Invoke logout function passed from context
+         * - Send user to "/"
+         */
+        await logout();
+        history.push("/");
+    };
     return (
         <div className="Navbar">
             <NavLink exact to="/" className="Navbar--logo">
@@ -25,9 +36,12 @@ const Navbar = () => {
                         <NavLink className="Navbar--nav--link" to="/profile">
                             Profile
                         </NavLink>
-                        <NavLink className="Navbar--nav--link" to="/">
+                        <button
+                            className="Navbar--nav--link--logout"
+                            onClick={handleClick}
+                        >
                             Logout {user.username}
-                        </NavLink>
+                        </button>
                     </>
                 ) : (
                     <>

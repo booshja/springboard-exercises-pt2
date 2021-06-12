@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 // context
 import UserContext from "../../../context/UserContext";
 // css
@@ -58,11 +58,6 @@ const SignupForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="SignupForm">
-            {error ? (
-                <span id="error" className="error">
-                    {error}
-                </span>
-            ) : null}
             <label htmlFor="username" className="SignupForm--label">
                 Username:
             </label>
@@ -123,6 +118,11 @@ const SignupForm = () => {
                 placeholder="Email"
                 className="SignupForm--input"
             />
+            {error ? (
+                <span id="error" className="error">
+                    {error}
+                </span>
+            ) : null}
             <button className="SignupForm--btn">Submit</button>
         </form>
     );

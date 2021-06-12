@@ -1,5 +1,7 @@
 import React from "react";
+// components
 import SignupForm from "../../components/Forms/SignupForm/SignupForm";
+// css
 import "../../assets/css/Signup.css";
 
 const Signup = () => {
