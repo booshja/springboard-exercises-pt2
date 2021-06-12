@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+// context
+import UserContext from "../../context/UserContext";
+// images
+import src from "../../assets/images/applicant.png";
+// css
 import "../../assets/css/Home.css";
 
 const Home = () => {
-    let loggedIn = false;
+    //set up context
+    const { user } = useContext(UserContext);
     return (
         <div className="Home">
             <img
-                src="https://my.applychance.com/Source/Professor/img/STU-Register.png"
+                src={src}
                 alt="applicant working at desk"
                 className="Home--img"
             />
             <h1 className="Home--title">Jobly</h1>
             <p className="Home--desc">All the jobs in one, convenient place.</p>
-            {loggedIn ? (
-                <p className="Home--returning">Welcome Back, username!</p>
+            {user ? (
+                <p className="Home--returning">
+                    Welcome Back, {user.firstName}!
+                </p>
             ) : (
                 <div className="Home--cta">
                     <Link to="/signup" className="Home--cta--button">

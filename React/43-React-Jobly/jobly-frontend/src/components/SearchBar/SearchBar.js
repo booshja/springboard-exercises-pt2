@@ -23,7 +23,7 @@ const SearchBar = ({ search }) => {
          * When form submits:
          * - Prevent reload of page
          * - Send query to search
-         * Clean the form inputs via state
+         * - Clean the form inputs via state
          */
         e.preventDefault();
         await search({ ...formData });

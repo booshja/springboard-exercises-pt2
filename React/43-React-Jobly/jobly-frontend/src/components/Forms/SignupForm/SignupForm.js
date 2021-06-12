@@ -1,9 +1,68 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router";
+// context
+import UserContext from "../../../context/UserContext";
+// css
 import "../../../assets/css/SignupForm.css";
 
 const SignupForm = () => {
+    // create blank slate for initial state
+    // const INITIAL_STATE = {
+    //     username: "",
+    //     password: "",
+    //     firstName: "",
+    //     lastName: "",
+    //     email: "",
+    // };
+    // DEVELOPMENT INITIAL STATE
+    const INITIAL_STATE = {
+        username: "ralph",
+        password: "password",
+        firstName: "Ralph",
+        lastName: "Andes",
+        email: "ralph@email.com",
+    };
+
+    // set up state, context, and history object
+    const [formData, setFormData] = useState(INITIAL_STATE);
+    const { signup } = useContext(UserContext);
+    const history = useHistory();
+    let error = false;
+
+    const handleChange = (e) => {
+        /** On form input change, update the value in state */
+        const { name, value } = e.target;
+        setFormData((formData) => ({
+            ...formData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        /**
+         * When form submits:
+         * - Prevent reload of page
+         * - Send data to API
+         * - Clean the form inputs via state
+         */
+        e.preventDefault();
+        try {
+            await signup({ ...formData });
+            setFormData(INITIAL_STATE);
+            history.push("/");
+        } catch (e) {
+            error = "Error registering user. Please try again.";
+            setFormData((formData) => formData);
+        }
+    };
+
     return (
-        <form className="SignupForm">
+        <form onSubmit={handleSubmit} className="SignupForm">
+            {error ? (
+                <span id="error" className="error">
+                    {error}
+                </span>
+            ) : null}
             <label htmlFor="username" className="SignupForm--label">
                 Username:
             </label>
@@ -11,6 +70,8 @@ const SignupForm = () => {
                 type="text"
                 id="username"
                 name="username"
+                value={formData.username}
+                onChange={handleChange}
                 className="SignupForm--input"
                 placeholder="Username"
             />
@@ -21,6 +82,8 @@ const SignupForm = () => {
                 type="password"
                 id="password"
                 name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Password"
                 className="SignupForm--input"
             />
@@ -31,6 +94,8 @@ const SignupForm = () => {
                 type="text"
                 id="firstName"
                 name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
                 placeholder="First Name"
                 className="SignupForm--input"
             />
@@ -41,6 +106,8 @@ const SignupForm = () => {
                 type="text"
                 id="lastName"
                 name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
                 placeholder="Last Name"
                 className="SignupForm--input"
             />
@@ -51,6 +118,8 @@ const SignupForm = () => {
                 type="text"
                 id="email"
                 name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Email"
                 className="SignupForm--input"
             />
