@@ -1,13 +1,17 @@
 import React from "react";
 import "../../assets/css/JobDetail.css";
 
-const JobDetail = () => {
+const JobDetail = ({ job }) => {
     return (
         <div className="JobDetail">
-            <p className="JobDetail--title">Head of badassery</p>
-            <p className="JobDetail--company">Corporate Firm #3</p>
-            <p className="JobDetail--financial">Equity: 51%</p>
-            <p className="JobDetail--financial">Salary: $1 bajillion</p>
+            <p className="JobDetail--title">{job.title}</p>
+            <p className="JobDetail--company">{job.companyName}</p>
+            {job.equity ? (
+                <p className="JobDetail--financial">Equity: {job.equity}</p>
+            ) : null}
+            {job.salary ? (
+                <p className="JobDetail--financial">Salary: {job.salary}</p>
+            ) : null}
             <button className="JobDetail--btn">APPLY</button>
         </div>
     );

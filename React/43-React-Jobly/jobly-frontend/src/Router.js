@@ -23,7 +23,7 @@ const Router = () => (
                     <Route exact path="/companies">
                         <Companies />
                     </Route>
-                    <Route exact path="/companies/:company">
+                    <Route exact path="/companies/:handle">
                         <CompanyPage />
                     </Route>
                     <Route exact path="/jobs">
