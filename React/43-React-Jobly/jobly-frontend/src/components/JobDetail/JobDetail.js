@@ -7,10 +7,10 @@ const JobDetail = ({ job }) => {
             <p className="JobDetail--title">{job.title}</p>
             <p className="JobDetail--company">{job.companyName}</p>
             {job.equity ? (
-                <p className="JobDetail--financial">Equity: {job.equity}</p>
+                <p className="JobDetail--financial">Equity: {job.equity}%</p>
             ) : null}
             {job.salary ? (
-                <p className="JobDetail--financial">Salary: {job.salary}</p>
+                <p className="JobDetail--financial">Salary: ${job.salary}</p>
             ) : null}
             <button className="JobDetail--btn">APPLY</button>
         </div>
