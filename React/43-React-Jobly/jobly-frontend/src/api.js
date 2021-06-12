@@ -54,6 +54,16 @@ class JoblyApi {
         return res.companies;
     }
 
+    /**
+     * Gets array of search results based on query
+     * Accepts => query
+     * Returns => [ { handle, name, description, numEmployees, logoUrl }, ...]
+     */
+    static async searchCompanies(data) {
+        let res = await this.request(`companies/`, data);
+        return res.companies;
+    }
+
     // Jobs Routes
     /**
      * Gets array of all jobs.
@@ -73,6 +83,16 @@ class JoblyApi {
         const method = "post";
         let res = await this.request(`${username}/jobs/${jobId}`, {}, method);
         return res;
+    }
+
+    /**
+     * Gets array of search results based on query
+     * Accepts => query
+     * Returns => [ { id, title, salary, equity, companyHandle, companyName }, ...]
+     */
+    static async searchJobs(data) {
+        let res = await this.request(`jobs/`, data);
+        return res.jobs;
     }
 
     // User Routes

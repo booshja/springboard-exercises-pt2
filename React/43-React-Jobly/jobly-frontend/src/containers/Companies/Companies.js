@@ -12,6 +12,13 @@ const Companies = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [companies, setCompanies] = useState([]);
 
+    async function search(searchObj) {
+        /** Send search to API, update state with result */
+        const query = { name: searchObj.search };
+        let res = await JoblyApi.searchCompanies(query);
+        setCompanies(res);
+    }
+
     useEffect(() => {
         /** When the component first mounts, get all the companies from the API */
         async function getComps() {
@@ -29,7 +36,7 @@ const Companies = () => {
     return (
         <div className="Companies">
             <h1 className="Companies--title">Companies</h1>
-            <SearchBar />
+            <SearchBar search={search} />
             <List items={companies} />
         </div>
     );
