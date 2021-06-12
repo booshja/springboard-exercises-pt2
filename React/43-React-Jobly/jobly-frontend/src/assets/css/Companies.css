@@ -1,0 +1,12 @@
+.Companies {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Companies--title {
+  font-size: 2.4rem;
+  margin: 1rem 0;
+}
+
+/*# sourceMappingURL=Companies.css.map */

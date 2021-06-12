@@ -1,0 +1,12 @@
+.Jobs {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Jobs--title {
+  font-size: 2.4rem;
+  margin: 1rem 0;
+}
+
+/*# sourceMappingURL=Jobs.css.map */

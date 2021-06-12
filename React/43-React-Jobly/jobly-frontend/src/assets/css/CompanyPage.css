@@ -1,0 +1,19 @@
+.CompanyPage {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.CompanyPage--name {
+  font-size: 2rem;
+  margin: 1rem 0;
+  align-self: flex-start;
+}
+.CompanyPage--desc {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+  font-style: italic;
+}
+
+/*# sourceMappingURL=CompanyPage.css.map */

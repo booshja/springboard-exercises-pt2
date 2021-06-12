@@ -1,0 +1,12 @@
+.Profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Profile--title {
+  font-size: 2.4rem;
+  margin: 1rem 0;
+  align-self: flex-start;
+}
+
+/*# sourceMappingURL=Profile.css.map */
