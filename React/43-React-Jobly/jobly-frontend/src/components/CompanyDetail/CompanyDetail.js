@@ -1,11 +1,14 @@
 import React from "react";
 import "../../assets/css/CompanyDetail.css";
 
-const CompanyDetail = () => {
+const CompanyDetail = ({ company }) => {
     return (
         <div className="CompanyDetail">
-            <p className="CompanyDetail--name">Company Name</p>
-            <p className="CompanyDetail--desc">Company Details</p>
+            <p className="CompanyDetail--name">{company.name}</p>
+            <p className="CompanyDetail--desc">{company.description}</p>
+            {company.logo ? (
+                <img src={company.logoUrl} alt="company logo" />
+            ) : null}
         </div>
     );
 };

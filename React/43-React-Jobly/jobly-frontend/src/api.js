@@ -43,7 +43,7 @@ class JoblyApi {
 
     /** Get array of all companies. */
     static async getAllCompanies() {
-        let res = await this.request(`/companies`);
+        let res = await this.request(`companies`);
         return res.companies;
     }
 
@@ -53,7 +53,7 @@ class JoblyApi {
      * Returns => [ { id, title, salary, equity, companyHandle, companyName }, ...]
      */
     static async getAllJobs() {
-        let res = await this.request(`/jobs`);
+        let res = await this.request(`jobs`);
         return res.jobs;
     }
 
@@ -64,7 +64,7 @@ class JoblyApi {
      */
     static async applyToJob(username, jobId) {
         const method = "post";
-        let res = await this.request(`/${username}/jobs/${jobId}`, {}, method);
+        let res = await this.request(`${username}/jobs/${jobId}`, {}, method);
         return res;
     }
 
@@ -78,7 +78,7 @@ class JoblyApi {
     static async registerUser(user) {
         const method = "post";
         const data = { ...user };
-        let res = await this.request(`/register`, data, method);
+        let res = await this.request(`register`, data, method);
         return res.token;
     }
 
@@ -90,7 +90,7 @@ class JoblyApi {
     static async loginUser(username, password) {
         const method = "post";
         const data = { username, password };
-        let res = await this.request(`/token`, data, method);
+        let res = await this.request(`token`, data, method);
         return res.token;
     }
 
@@ -104,7 +104,7 @@ class JoblyApi {
     static async updateUser(user) {
         const method = "patch";
         const data = { ...user };
-        let res = await this.request(`/${user.username}`, data, method);
+        let res = await this.request(`${user.username}`, data, method);
         return res.user;
     }
 }
@@ -114,3 +114,5 @@ JoblyApi.token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+
+export default JoblyApi;
