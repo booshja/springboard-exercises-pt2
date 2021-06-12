@@ -35,13 +35,20 @@ class JoblyApi {
     // Individual API routes
 
     // Companies Routes
-    /** Get details on a company by handle. Company's jobs are included. */
+    /**
+     * Get details on a company by handle. Company's jobs are included.
+     * Returns => { handle, name, description, numEmployees, logoUrl, jobs }
+     *      where jobs is [{ id, title, salary, equity }, ...]
+     */
     static async getCompany(handle) {
         let res = await this.request(`companies/${handle}`);
         return res.company;
     }
 
-    /** Get array of all companies. */
+    /**
+     * Get array of all companies.
+     * Returns => [ { handle, name, description, numEmployees, logoUrl }, ...]
+     */
     static async getAllCompanies() {
         let res = await this.request(`companies`);
         return res.companies;
