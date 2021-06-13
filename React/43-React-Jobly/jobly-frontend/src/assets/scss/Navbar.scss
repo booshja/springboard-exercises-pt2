@@ -22,12 +22,12 @@
 
         &--link {
             font-size: 1.2rem;
-            color: #0073df;
+            color: hsl(246, 43%, 48%);
             margin-left: 2rem;
             text-decoration: none;
 
             &:hover {
-                color: #0053a0;
+                color: hsl(246, 43%, 38%);
             }
 
             &.active {
@@ -35,4 +35,9 @@
             }
         }
     }
+}
+
+.logout {
+    border: none;
+    background: transparent;
 }

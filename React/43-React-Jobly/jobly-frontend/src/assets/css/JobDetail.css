@@ -36,5 +36,14 @@
   color: #c50000;
   cursor: pointer;
 }
+.JobDetail--btn--applied {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: #c5000081;
+  align-self: flex-end;
+}
 
 /*# sourceMappingURL=JobDetail.css.map */

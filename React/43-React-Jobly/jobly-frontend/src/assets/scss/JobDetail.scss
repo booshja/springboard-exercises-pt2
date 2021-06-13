@@ -39,5 +39,15 @@
             color: #c50000;
             cursor: pointer;
         }
+
+        &--applied {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background-color: #c5000081;
+            align-self: flex-end;
+        }
     }
 }

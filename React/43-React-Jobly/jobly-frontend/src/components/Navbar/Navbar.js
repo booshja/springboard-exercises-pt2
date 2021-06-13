@@ -37,7 +37,7 @@ const Navbar = () => {
                             Profile
                         </NavLink>
                         <button
-                            className="Navbar--nav--link--logout"
+                            className="Navbar--nav--link logout"
                             onClick={handleClick}
                         >
                             Logout {user.username}

@@ -21,15 +21,20 @@
 }
 .Navbar--nav--link {
   font-size: 1.2rem;
-  color: #0073df;
+  color: #5046af;
   margin-left: 2rem;
   text-decoration: none;
 }
 .Navbar--nav--link:hover {
-  color: #0053a0;
+  color: #40378b;
 }
 .Navbar--nav--link.active {
   font-weight: bold;
+}
+
+.logout {
+  border: none;
+  background: transparent;
 }
 
 /*# sourceMappingURL=Navbar.css.map */
