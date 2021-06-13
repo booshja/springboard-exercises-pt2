@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // router
 import Router from "./Router";
+// custom hook
+import useLocalStorage from "./hooks/useLocalStorage";
 // api
 import JoblyApi from "./api";
 // context
@@ -12,11 +14,16 @@ function App() {
     // set up states
     const [user, setUser] = useState(null);
     const [token, setToken] = useState("");
+    const [localStorageToken, setLocalStorageToken] = useLocalStorage();
+
+    useEffect(() => {
+        setToken(localStorageToken);
+    }, [localStorageToken]);
 
     async function signup(userData) {
         // Send data to API to register user.
         let token = await JoblyApi.registerUser(userData);
-        setToken(token);
+        setLocalStorageToken(token);
         let user = await JoblyApi.getUser(userData.username);
         setUser(user);
     }
@@ -24,7 +31,7 @@ function App() {
     async function login(username, password) {
         // Send data to API to authenticate user
         let token = await JoblyApi.loginUser(username, password);
-        setToken(token);
+        setLocalStorageToken(token);
         let user = await JoblyApi.getUser(username);
         setUser({ ...user });
     }
@@ -38,7 +45,7 @@ function App() {
     async function logout() {
         // Clear state and token on JoblyApi class to log out user
         await JoblyApi.logoutUser();
-        setToken("");
+        setLocalStorageToken("");
         setUser(null);
     }
 
