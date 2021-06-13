@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+// protected route wrapper
+import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
 // routes
 import Companies from "./containers/Companies/Companies";
 import CompanyPage from "./containers/CompanyPage/CompanyPage";
@@ -20,21 +22,21 @@ const Router = () => (
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    <Route exact path="/companies">
+                    <ProtectedRoute exact path="/companies">
                         <Companies />
-                    </Route>
-                    <Route exact path="/companies/:handle">
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/companies/:handle">
                         <CompanyPage />
-                    </Route>
-                    <Route exact path="/jobs">
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/jobs">
                         <Jobs />
-                    </Route>
+                    </ProtectedRoute>
                     <Route exact path="/login">
                         <Login />
                     </Route>
-                    <Route exact path="/profile">
+                    <ProtectedRoute exact path="/profile">
                         <Profile />
-                    </Route>
+                    </ProtectedRoute>
                     <Route exact path="/signup">
                         <Signup />
                     </Route>

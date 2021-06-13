@@ -13,7 +13,7 @@ const useLocalStorage = () => {
     });
 
     useEffect(() => {
-        window.localStorage.setItem("token", JSON.stringify(state));
+        window.localStorage.setItem("token", state);
     }, [state]);
 
     return [state, setState];

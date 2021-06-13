@@ -45,7 +45,7 @@ function App() {
     async function logout() {
         // Clear state and token on JoblyApi class to log out user
         await JoblyApi.logoutUser();
-        setLocalStorageToken("");
+        setLocalStorageToken(null);
         setUser(null);
     }
 
