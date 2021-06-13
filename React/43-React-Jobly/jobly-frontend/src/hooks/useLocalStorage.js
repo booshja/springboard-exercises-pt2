@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 
 const useLocalStorage = () => {
+    // set up state
     const [state, setState] = useState(() => {
+        // get initial state from localStorage if present
         let value;
         try {
             value = JSON.parse(window.localStorage.getItem("token"));
@@ -13,6 +15,7 @@ const useLocalStorage = () => {
     });
 
     useEffect(() => {
+        // when the state changes, set the localStorage
         window.localStorage.setItem("token", state);
     }, [state]);
 

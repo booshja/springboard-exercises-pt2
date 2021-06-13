@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+// css
 import "../../assets/css/CompanyDetail.css";
 
 const CompanyDetail = ({ company }) => {

@@ -105,13 +105,13 @@ const ProfileEditForm = () => {
                 className="ProfileEditForm--input"
             />
             <label htmlFor="password" className="ProfileEditForm--label">
-                Confirm password to make changes:
+                Change Password:
             </label>
             <input
                 type="password"
                 id="password"
                 name="password"
-                placeholder="Enter Password to Confirm"
+                placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
                 className="ProfileEditForm--input"

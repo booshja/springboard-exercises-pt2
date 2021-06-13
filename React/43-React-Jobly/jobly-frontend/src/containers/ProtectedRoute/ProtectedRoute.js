@@ -4,6 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 
 const ProtectedRoute = ({ children, ...rest }) => {
+    // set up context
     const { user } = useContext(UserContext);
     return (
         <Route
