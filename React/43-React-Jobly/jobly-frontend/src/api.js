@@ -125,16 +125,16 @@ class JoblyApi {
 
     /**
      * Edit user.
-     * Accepts => user details object with details to update.
-     *      Can include: { username, firstName, lastName, password, email }
+     * Accepts => username and user details object with details to update.
+     *      Can include: { firstName, lastName, password, email }
      *          (username cannot be updated)
      * Returns => updated user details object
      *      { username, firstName, lastName, email, isAdmin }
      */
-    static async updateUser(user) {
+    static async updateUser(username, userData) {
         const method = "patch";
-        const data = { ...user };
-        let res = await this.request(`${user.username}`, data, method);
+        const data = { ...userData };
+        let res = await this.request(`users/${username}`, data, method);
         return res.user;
     }
 

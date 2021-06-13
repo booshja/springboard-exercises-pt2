@@ -7,27 +7,19 @@ import "../../../assets/css/SignupForm.css";
 
 const SignupForm = () => {
     // create blank slate for initial state
-    // const INITIAL_STATE = {
-    //     username: "",
-    //     password: "",
-    //     firstName: "",
-    //     lastName: "",
-    //     email: "",
-    // };
-    // DEVELOPMENT INITIAL STATE
     const INITIAL_STATE = {
-        username: "ralph",
-        password: "password",
-        firstName: "Ralph",
-        lastName: "Andes",
-        email: "ralph@email.com",
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        email: "",
     };
 
     // set up state, context, and history object
     const [formData, setFormData] = useState(INITIAL_STATE);
+    const [error, setError] = useState(false);
     const { signup } = useContext(UserContext);
     const history = useHistory();
-    let error = false;
 
     const handleChange = (e) => {
         /** On form input change, update the value in state */
@@ -48,10 +40,11 @@ const SignupForm = () => {
         e.preventDefault();
         try {
             await signup({ ...formData });
+            setError(false);
             setFormData(INITIAL_STATE);
             history.push("/");
         } catch (e) {
-            error = "Error registering user. Please try again.";
+            setError("Error registering user. Please try again.");
             setFormData((formData) => formData);
         }
     };

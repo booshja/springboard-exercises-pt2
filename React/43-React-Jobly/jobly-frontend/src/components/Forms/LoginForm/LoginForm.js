@@ -14,9 +14,9 @@ const LoginForm = () => {
 
     // set up state, context, and history object
     const [formData, setFormData] = useState(INITIAL_STATE);
+    const [error, setError] = useState(false);
     const { login } = useContext(UserContext);
     const history = useHistory();
-    let error = false;
 
     const handleChange = (e) => {
         /** On form input change, update the value in state */
@@ -37,10 +37,11 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             await login(formData.username, formData.password);
+            setError(false);
             setFormData(INITIAL_STATE);
             history.push("/");
         } catch (e) {
-            error = "Invalid username/password.";
+            setError("Invalid username/password.");
             setFormData(INITIAL_STATE);
         }
     };

@@ -5,17 +5,20 @@ import UserContext from "../../../context/UserContext";
 import "../../../assets/css/ProfileEditForm.css";
 
 const ProfileEditForm = () => {
+    // set up context
+    let { update, user } = useContext(UserContext);
     // create blank slate for initial state
     const INITIAL_STATE = {
-        firstName: "",
-        lastName: "",
-        email: "",
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
         password: "",
     };
 
-    // set up state and context
+    // set up state and history object
     const [formData, setFormData] = useState(INITIAL_STATE);
-    const { editUser } = useContext(UserContext);
+    const [error, setError] = useState(false);
 
     const handleChange = (e) => {
         /** On form input change, update the value in state */
@@ -34,8 +37,22 @@ const ProfileEditForm = () => {
          * - Clean the form inputs via state
          */
         e.preventDefault();
-        const VARIABLE = await editUser({ ...formData });
-        setFormData(INITIAL_STATE);
+
+        // set up data for editing based on form
+        let userData = {};
+        const options = ["firstName", "lastName", "email", "password"];
+        for (let key of options) {
+            if (formData[key] !== "") {
+                userData[key] = formData[key];
+            }
+        }
+        try {
+            await update(user.username, userData);
+            setError("success");
+        } catch (e) {
+            setError("Error updating information. Please try again.");
+            setFormData((formData) => formData);
+        }
     };
 
     return (
@@ -58,6 +75,7 @@ const ProfileEditForm = () => {
                 type="text"
                 id="firstName"
                 name="firstName"
+                placeholder="First Name"
                 value={formData.firstName}
                 onChange={handleChange}
                 className="ProfileEditForm--input"
@@ -69,6 +87,7 @@ const ProfileEditForm = () => {
                 type="text"
                 id="lastName"
                 name="lastName"
+                placeholder="Last Name"
                 value={formData.lastName}
                 onChange={handleChange}
                 className="ProfileEditForm--input"
@@ -80,21 +99,31 @@ const ProfileEditForm = () => {
                 type="text"
                 id="email"
                 name="email"
+                placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
                 className="ProfileEditForm--input"
             />
             <label htmlFor="password" className="ProfileEditForm--label">
-                Confirm Password:
+                Confirm password to make changes:
             </label>
             <input
                 type="password"
                 id="password"
                 name="password"
+                placeholder="Enter Password to Confirm"
                 value={formData.password}
                 onChange={handleChange}
                 className="ProfileEditForm--input"
             />
+            {error ? (
+                <span
+                    id={error === "success" ? "success" : "error"}
+                    className="error"
+                >
+                    {error}
+                </span>
+            ) : null}
             <button className="ProfileEditForm--btn">Submit</button>
         </form>
     );

@@ -26,12 +26,12 @@ function App() {
         let token = await JoblyApi.loginUser(username, password);
         setToken(token);
         let user = await JoblyApi.getUser(username);
-        setUser(user);
+        setUser({ ...user });
     }
 
-    async function update(userData) {
+    async function update(username, userData) {
         /** Send data to API to update user */
-        let user = await JoblyApi.updateUser(userData);
+        let user = await JoblyApi.updateUser(username, userData);
         setUser(user);
     }
 
