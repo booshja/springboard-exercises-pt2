@@ -81,8 +81,12 @@ class JoblyApi {
      */
     static async applyToJob(username, jobId) {
         const method = "post";
-        let res = await this.request(`${username}/jobs/${jobId}`, {}, method);
-        return res;
+        let res = await this.request(
+            `users/${username}/jobs/${jobId}`,
+            {},
+            method
+        );
+        return res.applied;
     }
 
     /**
@@ -141,8 +145,8 @@ class JoblyApi {
     /**
      * Get user data.
      * Accepts => username
-     * Returns => { username, firstName, lastName, isAdmin, jobs }
-     *      where jobs is { id, title, companyHandle, companyName, state }
+     * Returns => { username, firstName, lastName, isAdmin, applications }
+     *      where applications is { id, title, companyHandle, companyName, state }
      */
     static async getUser(username) {
         let res = await this.request(`users/${username}`);

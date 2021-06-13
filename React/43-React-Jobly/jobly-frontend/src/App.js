@@ -11,9 +11,10 @@ import UserContext from "./context/UserContext";
 import "./assets/css/App.css";
 
 function App() {
-    // set up states
+    // set up states, useLocalStorage custom hook
     const [user, setUser] = useState(null);
     const [token, setToken] = useState("");
+    const [applications, setApplications] = useState([]);
     const [localStorageToken, setLocalStorageToken] = useLocalStorage();
 
     useEffect(() => {
@@ -21,7 +22,7 @@ function App() {
     }, [localStorageToken]);
 
     async function signup(userData) {
-        // Send data to API to register user.
+        /** Send data to API to register user. */
         let token = await JoblyApi.registerUser(userData);
         setLocalStorageToken(token);
         let user = await JoblyApi.getUser(userData.username);
@@ -29,11 +30,12 @@ function App() {
     }
 
     async function login(username, password) {
-        // Send data to API to authenticate user
+        /** Send data to API to authenticate user */
         let token = await JoblyApi.loginUser(username, password);
         setLocalStorageToken(token);
         let user = await JoblyApi.getUser(username);
         setUser({ ...user });
+        setApplications(user.applications);
     }
 
     async function update(username, userData) {
@@ -42,16 +44,32 @@ function App() {
         setUser(user);
     }
 
+    async function apply(username, id) {
+        /** Send data to API to apply user for job */
+        let jobId = await JoblyApi.applyToJob(username, id);
+        setApplications((apps) => [jobId, ...apps]);
+    }
+
     async function logout() {
-        // Clear state and token on JoblyApi class to log out user
+        /** Clear state and token on JoblyApi class to log out user */
         await JoblyApi.logoutUser();
         setLocalStorageToken(null);
         setUser(null);
+        setApplications([]);
     }
 
     return (
         <UserContext.Provider
-            value={{ signup, login, logout, update, user, token }}
+            value={{
+                signup,
+                login,
+                logout,
+                update,
+                apply,
+                applications,
+                user,
+                token,
+            }}
         >
             <Router />
         </UserContext.Provider>
