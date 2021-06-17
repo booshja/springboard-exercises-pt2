@@ -45,6 +45,8 @@ class LinkedList {
             this.tail = newNode;
         }
         this.length += 1;
+
+        return undefined;
     }
 
     /** unshift(val): add new value to start of list.
@@ -61,6 +63,8 @@ class LinkedList {
             this.head = newNode;
         }
         this.length += 1;
+
+        return undefined;
     }
 
     /** pop(): Remove last item.
@@ -152,7 +156,23 @@ class LinkedList {
      * Throws error if idx is invalid.
      **/
 
-    setAt(idx, val) {}
+    setAt(idx, val) {
+        // if empty list, throw error
+        this.checkIfEmpty();
+        // if invalid idx, throw error
+        this.checkIfInvalidIdx(idx);
+
+        // loop through to correct node
+        let currNode = this.head;
+        for (let i = 0; i < idx; i++) {
+            currNode = currNode.next;
+        }
+
+        // set currNode.val to val
+        currNode.val = val;
+
+        return undefined;
+    }
 
     /** insertAt(idx, val): add node w/val before idx.
      * Throws error if idx is invalid.
