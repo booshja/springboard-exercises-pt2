@@ -42,6 +42,7 @@ function sortedFrequency(array, val) {
         ) {
             leftIdx = middleIdx + 1;
         } else {
+            // return frequency total
             return middleIdx - leftFoundIdx + 1;
         }
     }
