@@ -18,7 +18,16 @@ class LinkedList {
         for (let val of vals) this.push(val);
     }
 
-    /** push(val): add new value to end of list. Returns undefined. */
+    /** LinkedList utility methods */
+    checkIfEmpty() {
+        if (this.length == 0) {
+            throw new Error("Cannot perform opertaion. List is empty.");
+        }
+    }
+
+    /** push(val): add new value to end of list.
+     * Returns undefined.
+     **/
 
     push(val) {
         const newNode = new Node(val);
@@ -32,15 +41,62 @@ class LinkedList {
         this.length += 1;
     }
 
-    /** unshift(val): add new value to start of list. Returns undefined. */
+    /** unshift(val): add new value to start of list.
+     * Returns undefined.
+     **/
 
-    unshift(val) {}
+    unshift(val) {
+        const newNode = new Node(val);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length += 1;
+    }
 
-    /** pop(): Remove last item. Returns removed item. */
+    /** pop(): Remove last item.
+     * Throws error if list is empty.
+     * Returns removed item.
+     **/
 
-    pop() {}
+    pop() {
+        // check for empty list
+        this.checkIfEmpty();
 
-    /** shift(): Remove first item. Returns removed item. */
+        // get node value to return
+        const lastNodeVal = this.tail.val;
+
+        // find last node
+        let findNode = this.head;
+
+        // if only one node in list, empty list, return val
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+            this.length = 0;
+            return lastNodeVal;
+        }
+
+        // find second to last node
+        while (findNode.next != this.tail) {
+            findNode = findNode.next;
+        }
+
+        // update LinkedList data
+        this.tail = findNode;
+        this.tail.next = null;
+        this.length -= 1;
+
+        return lastNodeVal;
+    }
+
+    /** shift(): Remove first item.
+     * Throws error if list is empty.
+     * Returns removed item.
+     **/
 
     shift() {}
 
