@@ -93,12 +93,32 @@ class LinkedList {
 
     /** shift(): Remove first item.
      * Throws error if list is empty.
-     * Returns removed item.
+     * Returns removed val.
      **/
 
     shift() {
         // if list is empty, throw error
         this.checkIfEmpty();
+
+        //get node value to return
+        const firstNodeVal = this.head.val;
+
+        // if only one node in list, reset list, return val
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+            this.length = 0;
+            return firstNodeVal;
+        }
+
+        // get second node for new head
+        const newHeadNode = this.head.next;
+
+        // make newHeadNode first node, update list length
+        this.head = newHeadNode;
+        this.length -= 1;
+
+        return firstNodeVal;
     }
 
     /** getAt(idx): get val at idx.
