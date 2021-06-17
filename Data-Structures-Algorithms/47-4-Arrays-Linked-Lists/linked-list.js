@@ -63,14 +63,11 @@ class LinkedList {
      **/
 
     pop() {
-        // check for empty list
+        // if list is empty, throw error
         this.checkIfEmpty();
 
         // get node value to return
         const lastNodeVal = this.tail.val;
-
-        // find last node
-        let findNode = this.head;
 
         // if only one node in list, empty list, return val
         if (this.head === this.tail) {
@@ -81,11 +78,12 @@ class LinkedList {
         }
 
         // find second to last node
+        let findNode = this.head;
         while (findNode.next != this.tail) {
             findNode = findNode.next;
         }
 
-        // update LinkedList data
+        // make findNode last node, update list length
         this.tail = findNode;
         this.tail.next = null;
         this.length -= 1;
@@ -98,7 +96,10 @@ class LinkedList {
      * Returns removed item.
      **/
 
-    shift() {}
+    shift() {
+        // if list is empty, throw error
+        this.checkIfEmpty();
+    }
 
     /** getAt(idx): get val at idx.
      * Returns val.
