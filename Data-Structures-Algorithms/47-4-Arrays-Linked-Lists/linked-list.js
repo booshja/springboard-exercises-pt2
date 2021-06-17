@@ -25,6 +25,12 @@ class LinkedList {
         }
     }
 
+    checkIfInvalidIdx(idx) {
+        if (idx > this.length || idx < 0) {
+            throw new Error("Invalid index.");
+        }
+    }
+
     /** push(val): add new value to end of list.
      * Returns undefined.
      **/
@@ -126,7 +132,20 @@ class LinkedList {
      * Throws error if idx is invalid.
      **/
 
-    getAt(idx) {}
+    getAt(idx) {
+        // if empty list, throw error
+        this.checkIfEmpty();
+        // if invalid idx, throw error
+        this.checkIfInvalidIdx(idx);
+
+        // loop through to correct node
+        let currNode = this.head;
+        for (let i = 0; i < idx; i++) {
+            currNode = currNode.next;
+        }
+
+        return currNode.val;
+    }
 
     /** setAt(idx, val): set val at idx to val.
      * Returns undefined.
