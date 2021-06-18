@@ -272,9 +272,27 @@ class LinkedList {
         return removeNodeVal;
     }
 
-    /** average(): return an average of all values in the list */
+    /** average(): return an average of all values in the list
+     * Returns 0 if empty list
+     */
 
-    average() {}
+    average() {
+        // if empty list, return 0
+        if (this.length === 0) {
+            return 0;
+        }
+
+        // sum all items in list
+        let currNode = this.head;
+        let totalSum = currNode.val;
+        for (let i = 1; i < this.length; i++) {
+            currNode = currNode.next;
+            totalSum = totalSum + currNode.val;
+        }
+
+        // return average
+        return totalSum / this.length;
+    }
 }
 
 module.exports = LinkedList;
