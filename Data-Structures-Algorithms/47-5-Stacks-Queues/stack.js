@@ -43,6 +43,24 @@ class Stack {
     pop() {
         // if stack is empty, throw error
         if (this.isEmpty()) throw new Error("Cannot pop from empty stack.");
+
+        // get value to return
+        const popVal = this.first.val;
+
+        // if only one item in stack, empty stack and return val
+        if (this.size === 1) {
+            this.first = null;
+            this.last = null;
+            this.size = 0;
+            return popVal;
+        }
+
+        // set second item to first in stack, return val
+        const secondNode = this.first.next;
+        this.first = secondNode;
+        this.size -= 1;
+
+        return popVal;
     }
 
     /** peek(): return the value of the first node in the stack. */
