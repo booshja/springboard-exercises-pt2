@@ -236,9 +236,7 @@ class LinkedList {
         // if only item in list, set list to be empty and return
         if (this.length === 1) {
             const removeVal = this.head.val;
-            this.head = null;
-            this.tail = null;
-            this.length = 0;
+            this.emptyList();
             return removeVal;
         }
 
