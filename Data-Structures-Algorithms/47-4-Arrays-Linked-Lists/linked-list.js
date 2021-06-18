@@ -31,6 +31,20 @@ class LinkedList {
         }
     }
 
+    checkIfInvalidIdxOrEmpty(idx) {
+        if (idx > this.length || idx < 0) {
+            if (this.length > 0) {
+                throw new Error("Invalid index.");
+            }
+        }
+    }
+
+    emptyList() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
     /** push(val): add new value to end of list.
      * Returns undefined.
      **/
@@ -81,9 +95,7 @@ class LinkedList {
 
         // if only one node in list, empty list, return val
         if (this.head === this.tail) {
-            this.head = null;
-            this.tail = null;
-            this.length = 0;
+            this.emptyList();
             return lastNodeVal;
         }
 
@@ -115,9 +127,7 @@ class LinkedList {
 
         // if only one node in list, reset list, return val
         if (this.head === this.tail) {
-            this.head = null;
-            this.tail = null;
-            this.length = 0;
+            this.emptyList();
             return firstNodeVal;
         }
 
@@ -179,7 +189,38 @@ class LinkedList {
      * Returns undefined.
      */
 
-    insertAt(idx, val) {}
+    insertAt(idx, val) {
+        // if idx is invalid, throw error
+        this.checkIfInvalidIdxOrEmpty(idx);
+
+        const newNode = new Node(val);
+
+        // if empty list, add node and return
+        if (this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+            this.length = 1;
+            return undefined;
+        }
+
+        // loop through to get nodes
+        let beforeNode = this.head;
+        for (let i = 1; i < idx; i++) {
+            beforeNode = beforeNode.next;
+        }
+        const afterNode = beforeNode.next;
+
+        // set new values for insertion
+        beforeNode.next = newNode;
+        if (!afterNode) {
+            this.tail = newNode;
+        } else {
+            newNode.next = afterNode;
+        }
+        this.length += 1;
+
+        return undefined;
+    }
 
     /** removeAt(idx): remove item at idx,
      * Throws error if idx is invalid.
