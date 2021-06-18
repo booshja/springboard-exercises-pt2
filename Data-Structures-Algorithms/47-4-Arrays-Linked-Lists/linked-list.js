@@ -227,7 +227,50 @@ class LinkedList {
      * Returns removed item.
      */
 
-    removeAt(idx) {}
+    removeAt(idx) {
+        // if empty list, throw error
+        this.checkIfEmpty();
+        // if invalid idx, throw error
+        this.checkIfInvalidIdx(idx);
+
+        // if only item in list, set list to be empty and return
+        if (this.length === 1) {
+            const removeVal = this.head.val;
+            this.head = null;
+            this.tail = null;
+            this.length = 0;
+            return removeVal;
+        }
+
+        // if removing head, set new head value and length and return former head val
+        if (idx === 0) {
+            const removeVal = this.head.val;
+            this.head = this.head.next;
+            this.length -= 1;
+            return removeVal;
+        }
+
+        // loop through to nodes
+        let beforeNode = this.head;
+        for (let i = 1; i < idx; i++) {
+            beforeNode = beforeNode.next;
+        }
+        const removeNodeVal = beforeNode.next.val;
+        // if removing tail, set new tail value and length and return former tail val
+        if (idx === this.length - 1) {
+            this.tail = beforeNode;
+            this.length -= 1;
+            return removeNodeVal;
+        }
+        // else set after node
+        const afterNode = beforeNode.next.next;
+
+        // set new values for post removal
+        beforeNode.next = afterNode;
+        this.length -= 1;
+
+        return removeNodeVal;
+    }
 
     /** average(): return an average of all values in the list */
 
