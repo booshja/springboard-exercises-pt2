@@ -25,9 +25,12 @@ function everyOther(str) {
 }
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
-function isPalindrome(str) {
-    // Base Case
-    // Normal Case
+function isPalindrome(str, idx = 0) {
+    let leftIdx = idx;
+    let rightIdx = str.length - idx - 1;
+    if (leftIdx >= rightIdx) return true;
+    if (str[leftIdx] !== str[rightIdx]) return false;
+    return isPalindrome(str, idx + 1);
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
@@ -39,18 +42,13 @@ function findIndex(arr, val) {
 /** revString: return a copy of a string, but in reverse. */
 function revString(str) {
     // Base Case
+    if (str.length === 0) return "";
     // Normal Case
+    return revString(str.slice(1)) + str[0];
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 function gatherStrings(obj) {
-    // Base Case
-    // Normal Case
-}
-
-/** binarySearch: given a sorted array of numbers, and a value,
- * return the index of that value (or -1 if val is not present). */
-function binarySearch(arr, val) {
     // Base Case
     // Normal Case
 }
@@ -63,5 +61,5 @@ module.exports = {
     findIndex,
     revString,
     gatherStrings,
-    binarySearch,
+    // binarySearch,
 };
