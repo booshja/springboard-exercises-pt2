@@ -34,9 +34,12 @@ function isPalindrome(str, idx = 0) {
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
-function findIndex(arr, val) {
+function findIndex(arr, val, idx = 0) {
     // Base Case
+    if (idx === arr.length) return -1;
     // Normal Case
+    if (arr[idx] === val) return idx;
+    return findIndex(arr, val, idx + 1);
 }
 
 /** revString: return a copy of a string, but in reverse. */
@@ -49,8 +52,13 @@ function revString(str) {
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 function gatherStrings(obj) {
-    // Base Case
-    // Normal Case
+    let stringArray = [];
+    for (let key in obj) {
+        if (typeof obj[key] === "string") stringArray.push(obj[key]);
+        if (typeof obj[key] === "object")
+            stringArray.push(...gatherStrings(obj[key]));
+    }
+    return stringArray;
 }
 
 module.exports = {
@@ -61,5 +69,4 @@ module.exports = {
     findIndex,
     revString,
     gatherStrings,
-    // binarySearch,
 };
