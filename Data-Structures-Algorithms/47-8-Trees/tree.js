@@ -71,7 +71,31 @@ class Tree {
     /** numGreater(lowerBound): return a count of the number of nodes
      * whose value is greater than lowerBound. */
 
-    numGreater(lowerBound) {}
+    numGreater(lowerBound) {
+        // if no root node, return 0
+        if (!this.root) return 0;
+
+        // initialize total as 1 if root > lowerBound, 0 if not
+        let total = this.root.val > lowerBound ? 1 : 0;
+
+        // recursive function for iterating through & checking children vals
+        function doNumCheck(node) {
+            // loop through children
+            for (let childNode of node.children) {
+                // if val > lowerBound, add 1 to total
+                if (childNode.val > lowerBound) {
+                    total += 1;
+                }
+
+                // if childNode has children, recurse with childNode
+                doNumCheck(childNode);
+            }
+        }
+
+        // check the values of children and add if > lowerBound
+        doNumCheck(this.root);
+        return total;
+    }
 }
 
 module.exports = { Tree, TreeNode };
