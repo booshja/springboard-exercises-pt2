@@ -43,7 +43,29 @@ class Tree {
     /** countEvens(): count all of the nodes in the tree with even values. */
 
     countEvens() {
+        // if no root node, return 0
         if (!this.root) return 0;
+
+        // initialize total as 1 if root is even, 0 if not
+        let total = this.root % 2 === 0 ? 1 : 0;
+
+        // recursive function for iterating through children
+        function doCount(node) {
+            // loop through children
+            for (let childNode of node.children) {
+                // if value is even, add 1 to total
+                if (childNode.val % 2 === 0) {
+                    total += 1;
+                }
+
+                // if childNode has children, recurse with childNode
+                doCount(childNode);
+            }
+        }
+
+        // check the values of children and add if even
+        doCount(this.root);
+        return total;
     }
 
     /** numGreater(lowerBound): return a count of the number of nodes
