@@ -60,12 +60,53 @@ class BinaryTree {
     /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
      * The path doesn't need to start at the root, but you can't visit a node more than once. */
 
-    maxSum() {}
+    maxSum() {
+        let sum = 0;
+
+        // recursive function for iterating through children
+        function doMaxSum(node) {
+            if (node === null) return 0;
+            // sum all the left children from node
+            const leftSum = doMaxSum(node.left);
+            // sum all the right children from node
+            const rightSum = doMaxSum(node.right);
+            // sum is the max of sum or the node plus children sums
+            sum = Math.max(sum, node.val + leftSum + rightSum);
+            // return 0 or summed values, whichever is larger
+            return Math.max(0, leftSum + node.val, rightSum + node.val);
+        }
+
+        doMaxSum(this.root);
+        return sum;
+    }
 
     /** nextLarger(lowerBound): return the smallest value in the tree
      * which is larger than lowerBound. Return null if no such value exists. */
 
-    nextLarger(lowerBound) {}
+    nextLarger(lowerBound) {
+        // if no root node, return null
+        if (!this.root) return null;
+
+        // use BFS
+        let queue = [this.root];
+        let closest = null;
+
+        while (queue.length) {
+            let currNode = queue.shift();
+            let currVal = currNode.val;
+            let biggerThanBound = currVal > lowerBound;
+            let shouldReassignClosest = currVal < closest || closest === null;
+
+            if (biggerThanBound && shouldReassignClosest) {
+                closest = currVal;
+            }
+
+            if (currNode.left) queue.push(currNode.left);
+            if (currNode.right) queue.push(currNode.right);
+        }
+
+        return closest;
+    }
 }
 
 module.exports = { BinaryTree, BinaryTreeNode };
