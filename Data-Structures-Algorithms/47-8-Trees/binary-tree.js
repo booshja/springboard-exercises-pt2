@@ -28,7 +28,7 @@ class BinaryTree {
             if (node.left === null) return doMinDepth(node.right) + 1;
             // if node.left has children, return the count of those, plus 1
             if (node.right === null) return doMinDepth(node.left) + 1;
-            // else, both have children, return the minimum of each path, plus 2
+            // else, both have children, return the minimum of each path, plus 1
             return Math.min(doMinDepth(node.left), doMinDepth(node.right)) + 1;
         }
 
@@ -41,6 +41,20 @@ class BinaryTree {
     maxDepth() {
         // return 0 if no root node
         if (!this.root) return 0;
+
+        // recursive function for iterating through children
+        function doMaxDepth(node) {
+            // if no children, return 1
+            if (node.left === null && node.right === null) return 1;
+            // if node.right has children, return the count of those, plus 1
+            if (node.left === null) return doMaxDepth(node.right) + 1;
+            // if node.left has children, return the count of those, plus 1
+            if (node.right === null) return doMaxDepth(node.left) + 1;
+            // else, both have children, return the max of each path, plus 1;
+            return Math.max(doMaxDepth(node.left), doMaxDepth(node.right)) + 1;
+        }
+
+        return doMaxDepth(this.root);
     }
 
     /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
