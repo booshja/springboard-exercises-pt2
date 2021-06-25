@@ -101,7 +101,21 @@ class BinarySearchTree {
     /** findRecursively(val): search the tree for a node with value val.
      * return the node, if found; else undefined. Uses recursion. */
 
-    findRecursively(val) {}
+    findRecursively(val, currNode = this.root) {
+        // if empty tree return undefined
+        if (currNode === null) return undefined;
+
+        // if correct node, return it
+        if (currNode.val === val) return currNode;
+
+        if (val < currNode.val) {
+            if (currNode.left === null) return undefined;
+            return this.findRecursively(val, currNode.left);
+        } else {
+            if (currNode.right === null) return undefined;
+            return this.findRecursively(val, currNode.right);
+        }
+    }
 
     /** dfsPreOrder(): Traverse the array using pre-order DFS.
      * Return an array of visited nodes. */
