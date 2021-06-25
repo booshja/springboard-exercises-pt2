@@ -125,7 +125,12 @@ class BinarySearchTree {
     /** dfsInOrder(): Traverse the array using in-order DFS.
      * Return an array of visited nodes. */
 
-    dfsInOrder() {}
+    dfsInOrder(node = this.root, visited = []) {
+        if (node.left) this.dfsInOrder(node.left, visited);
+        visited.push(node.val);
+        if (node.right) this.dfsInOrder(node.right, visited);
+        return visited;
+    }
 
     /** dfsPostOrder(): Traverse the array using post-order DFS.
      * Return an array of visited nodes. */
