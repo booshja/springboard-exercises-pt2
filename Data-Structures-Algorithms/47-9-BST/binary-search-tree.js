@@ -120,7 +120,19 @@ class BinarySearchTree {
     /** dfsPreOrder(): Traverse the array using pre-order DFS.
      * Return an array of visited nodes. */
 
-    dfsPreOrder() {}
+    dfsPreOrder() {
+        const visited = [];
+        let currNode = this.root;
+        // recursive function
+        function traverse(node) {
+            visited.push(node.val);
+            if (node.left) traverse(node.left);
+            if (node.right) traverse(node.right);
+        }
+
+        traverse(currNode);
+        return visited;
+    }
 
     /** dfsInOrder(): Traverse the array using in-order DFS.
      * Return an array of visited nodes. */
@@ -135,12 +147,37 @@ class BinarySearchTree {
     /** dfsPostOrder(): Traverse the array using post-order DFS.
      * Return an array of visited nodes. */
 
-    dfsPostOrder() {}
+    dfsPostOrder() {
+        const visited = [];
+        let currNode = this.root;
+        // recursive function
+        function traverse(node) {
+            if (node.left) traverse(node.left);
+            if (node.right) traverse(node.right);
+            visited.push(node.val);
+        }
+
+        traverse(currNode);
+        return visited;
+    }
 
     /** bfs(): Traverse the array using BFS.
      * Return an array of visited nodes. */
 
-    bfs() {}
+    bfs() {
+        let current = this.root;
+        const visited = [];
+        const toVisitQueue = [current];
+
+        while (toVisitQueue.length) {
+            current = toVisitQueue.shift();
+            visited.push(current.val);
+
+            if (current.left) toVisitQueue.push(current.left);
+            if (current.right) toVisitQueue.push(current.right);
+        }
+        return visited;
+    }
 }
 
 module.exports = BinarySearchTree;
