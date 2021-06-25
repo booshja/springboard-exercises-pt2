@@ -47,12 +47,56 @@ class BinarySearchTree {
     /** insertRecursively(val): insert a new node into the BST with value val.
      * Returns the tree. Uses recursion. */
 
-    insertRecursively(val) {}
+    insertRecursively(val, currNode = this.root) {
+        const newNode = new Node(val);
+
+        // if tree is empty make new node the root
+        if (!this.root) {
+            this.root = newNode;
+            return this;
+        }
+
+        if (val < currNode.val) {
+            if (currNode.left === null) {
+                currNode.left = newNode;
+                return this;
+            }
+            return this.insertRecursively(val, currNode.left);
+        } else {
+            if (currNode.right === null) {
+                currNode.right = newNode;
+                return this;
+            }
+            return this.insertRecursively(val, currNode.right);
+        }
+    }
 
     /** find(val): search the tree for a node with value val.
      * return the node, if found; else undefined. Uses iteration. */
 
-    find(val) {}
+    find(val) {
+        // if tree is empty return undefined
+        if (!this.root) return undefined;
+
+        let currNode = this.root;
+
+        while (true) {
+            if (val === currNode.val) {
+                // if this is the right node, return it
+                return currNode;
+            } else if (val < currNode.val) {
+                // if there's no child node, not found return undefined
+                if (currNode.left === null) return undefined;
+                // set current node to the next child down to continue search in loop
+                currNode = currNode.left;
+            } else if (val > currNode.val) {
+                // if there's no child node, not found return undefined
+                if (currNode.right === null) return undefined;
+                // set current node to the next child down to continue search in loop
+                currNode = currNode.right;
+            }
+        }
+    }
 
     /** findRecursively(val): search the tree for a node with value val.
      * return the node, if found; else undefined. Uses recursion. */
