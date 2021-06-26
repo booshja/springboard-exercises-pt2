@@ -45,10 +45,48 @@ class Graph {
     }
 
     // this function returns an array of Node values using DFS
-    depthFirstSearch(start) {}
+    depthFirstSearch(start) {
+        const seen = new Set();
+        const result = [];
+
+        function doDFS(vertex) {
+            // Base Case
+            if (!vertex) return null;
+
+            seen.add(vertex);
+            result.push(vertex.value);
+
+            vertex.adjacent.forEach((neighbor) => {
+                if (!seen.has(neighbor)) {
+                    return doDFS(neighbor);
+                }
+            });
+        }
+
+        doDFS(start);
+        return result;
+    }
 
     // this function returns an array of Node values using BFS
-    breadthFirstSearch(start) {}
+    breadthFirstSearch(start) {
+        const toVisitQueue = [start];
+        let seen = new Set(toVisitQueue);
+        const result = [start.value];
+
+        while (toVisitQueue.length) {
+            let currVertex = toVisitQueue.shift();
+
+            for (let neighbor of currVertex.adjacent) {
+                if (!seen.has(neighbor)) {
+                    toVisitQueue.push(neighbor);
+                    seen.add(neighbor);
+                    result.push(neighbor.value);
+                }
+            }
+        }
+
+        return result;
+    }
 }
 
 module.exports = { Graph, Node };
